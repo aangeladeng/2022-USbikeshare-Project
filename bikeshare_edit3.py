@@ -10,7 +10,7 @@ CITY_DATA = { 'chicago': 'chicago.csv',
 
 CITIES = ['chicago','new york city','washington']
 
-MONTHS = ['january', 'february', 'march', 'april', 'may', 'june']
+MONTHS = ['january', 'february', 'march', 'april', 'may', 'june','all']
 
 DAYS = ['sunday', 'monday', 'tuesday', 'wednesday','thursday', 'friday', 'saturday' ]
 
@@ -35,10 +35,14 @@ def get_filters():
               print("The city you selected is invalid.Choose a city from the list")
     print('City selected is:\n',city.upper())
     # get user input for month (all, january, february, ... , june)
-    month = get_user_input('Select a month to analyse: january,february,march,april,may or june.\n'
-            'Or enter \'all\' to apply no month filter. \n> ', MONTHS)
+    while True:
+            month=input('Which month do you wish to analyse: January,February,March,April,May,June or all')
+            month=month.lower()
+            if month in MONTHS:
+                break
+            else:
+                print('Oops, looks like you entered an invalid input.Try again')
     print('Month selected is:\n',month.upper())
-
     # get user input for day of week (all, monday, tuesday, ... sunday)
     day = get_user_input('Please pick a day of the week:monday, tuesday,wednesday,thursday,friday,saturday,sunday.\n'
             'Or enter \'all\' to apply no date filter.\n> ', DAYS)
@@ -266,7 +270,7 @@ def main():
         user_stats(df)
         display_data(df)
 
-        restart = input('\nWould you like to restart? Enter yes or no.\n')
+        restart = input('\nWould you like to restart? Enter Yes to restart or No to continue.\n')
         if restart.lower() != 'yes':
             break
 
